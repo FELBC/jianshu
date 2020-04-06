@@ -59,7 +59,7 @@ const Header = (props) => {
 // 通过props渲染到页面
 const mapStateToProps = (state) => {
     return {
-        focused:state.focused
+        focused:state.header.focused
     }
 }
 
