@@ -3,7 +3,7 @@
 // reducer存放过多数据会造成代码不可维护
 // 把一个reducer拆分成多个子的reducer
 // 然后通过combineReducers再做整合
-import { combineReducers } from 'redux';
+import { combineReducers } from 'redux-immutable';
 import { reducer as headerReducer} from '../common/header/store';
 
 //整合各模块对应reducer，组合成大的reducer
