@@ -20,8 +20,8 @@ import {
 
 class Header extends Component{
 
-    getListArea(show){
-        if(show){
+    getListArea(){
+        if(this.props.focused){
             return (
                 <SearchInfo>
                     <SearchInfoTitle>
@@ -29,12 +29,11 @@ class Header extends Component{
                         <SearchInfoSwitch>换一批</SearchInfoSwitch>
                     </SearchInfoTitle>
                     <SearchInfoList>
-                        <SearchInfoItem>教育</SearchInfoItem>
-                        <SearchInfoItem>教育</SearchInfoItem>
-                        <SearchInfoItem>教育</SearchInfoItem>
-                        <SearchInfoItem>教育</SearchInfoItem>
-                        <SearchInfoItem>教育</SearchInfoItem>
-                        <SearchInfoItem>教育</SearchInfoItem>
+                        {
+                            this.props.list.map((item) => {
+                                return <SearchInfoItem key={item}>{item}</SearchInfoItem>
+                            })
+                        }
                     </SearchInfoList>
                  </SearchInfo>
             )
@@ -70,7 +69,7 @@ class Header extends Component{
                         <i className={this.props.focused ? 'focused iconfont':'iconfont'}>
                             &#xe6dd;
                         </i>
-                        {this.getListArea(this.props.focused)}
+                        {this.getListArea()}
                     </SearchWrapper>
                 </Nav>
                 <Addition>
@@ -91,7 +90,8 @@ const mapStateToProps = (state) => {
     return {
         // 通过使用redux-immutable将state也变成immutable对象
         // immutable类型数据调用对象属性需要通过.get(属性)方式
-        focused:state.getIn(['header','focused'])
+        focused:state.getIn(['header','focused']),
+        list:state.getIn(['header','list'])
     }
 }
 
