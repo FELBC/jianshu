@@ -106,6 +106,9 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         handleInputFocus(){
+            // 派发getList action获取热门搜索异步数据
+            dispatch(actionCreators.getList());
+            // 控制列表显示，input框长短
             dispatch(actionCreators.searchFocus());
         },
         handleInputBlur(){
