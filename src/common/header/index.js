@@ -60,7 +60,8 @@ const Header = (props) => {
 // 通过props渲染到页面
 const mapStateToProps = (state) => {
     return {
-        focused:state.header.focused
+        // immutable类型数据调用对象属性需要通过.get(属性)方式
+        focused:state.header.get('focused')
     }
 }
 
