@@ -42,8 +42,15 @@ class Header extends Component{
                     <SearchInfoTitle>
                         热门搜索
                         <SearchInfoSwitch 
-                            onClick={() => handleChangePage(page,totalPage)}
+                            onClick={() => handleChangePage(page,totalPage,this.spinIcon)}
                         >
+                            {/*获取当前真实dom节点*/}
+                            <i 
+                                ref={(icon) => {this.spinIcon = icon}}
+                                className="iconfont spin"
+                            >
+                                &#xe851;
+                            </i>
                             换一批
                         </SearchInfoSwitch>
                     </SearchInfoTitle>
@@ -82,7 +89,7 @@ class Header extends Component{
                             >
                             </NavSearch>
                         </CSSTransition>
-                        <i className={focused ? 'focused iconfont':'iconfont'}>
+                        <i className={focused ? 'focused iconfont zoom':'iconfont zoom'}>
                             &#xe6dd;
                         </i>
                         {this.getListArea()}
@@ -139,7 +146,16 @@ const mapDispatchToProps = (dispatch) => {
         handleMouseLeave(){
             dispatch(actionCreators.mouseLeave());
         },
-        handleChangePage(page,totalPage){
+        handleChangePage(page,totalPage, spin){
+            let originAngle = spin.style.transform.replace(/[^0-9]/ig,'');
+            //初次加载没有rotate值设为0，以后每次点击+360deg实现旋转动画效果
+            if(originAngle){
+                originAngle = parseInt(originAngle,10);
+            }else{
+                originAngle = 0;
+            }
+            spin.style.transform = 'rotate(' + (originAngle + 360) + 'deg)';
+            
             if(page < totalPage){
                 dispatch(actionCreators.changePage(page+1));
             }else{
