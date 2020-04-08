@@ -16,18 +16,18 @@ const defaultState = fromJS({
 // 返回新的state的状态，
 // immutable库可以帮助我们避免不小心改变state里面数据的问题
 export default (state = defaultState, action) => {
-    if(action.type === constants.SEARCH_FOCUS){
-        // immutable类型数据修改需要调用.set(属性，值)方式
-        // immutable对象的set方法，会结合之前immutable对象的值，
-        // 和设置的值，返回一个全新的对象，
-        // 从而避免了修改原始的immutable数据
-        return state.set('focused',true);
+    // immutable类型数据修改需要调用.set(属性，值)方式
+    // immutable对象的set方法，会结合之前immutable对象的值，
+    // 和设置的值，返回一个全新的对象，
+    // 从而避免了修改原始的immutable数据
+    switch(action.type){
+        case constants.SEARCH_FOCUS:
+            return state.set('focused',true);
+        case constants.SEARCH_BLUR:
+            return state.set('focused',false);
+        case constants.CHANGE_LIST:
+            return state.set('list',action.data);
+        default:
+            return state;
     }
-    if(action.type === constants.SEARCH_BLUR){
-        return state.set('focused',false);
-    }
-    if(action.type === constants.CHANGE_LIST){
-        return state.set('list',action.data);
-    }
-    return state;
 }
