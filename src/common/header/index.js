@@ -65,7 +65,7 @@ class Header extends Component{
     }
 
     render(){
-        const { focused, handleInputFocus, handleInputBlur } = this.props;
+        const { focused, handleInputFocus, handleInputBlur, list } = this.props;
         return (
             <HeaderWrapper>
                 <Logo />
@@ -84,7 +84,7 @@ class Header extends Component{
                         >
                             <NavSearch
                                 className={focused ? 'focused':''}
-                                onFocus = {handleInputFocus}    
+                                onFocus = {() => handleInputFocus(list)}    
                                 onBlur = {handleInputBlur}
                             >
                             </NavSearch>
@@ -131,9 +131,10 @@ const mapStateToProps = (state) => {
 ************************************************************************/
 const mapDispatchToProps = (dispatch) => {
     return {
-        handleInputFocus(){
+        handleInputFocus(list){
+            // 避免过多发送无意义异步请求，只有list.size为0的时候才发送
             // 派发getList action获取热门搜索异步数据
-            dispatch(actionCreators.getList());
+            (list.size === 0) && dispatch(actionCreators.getList());
             // 控制列表显示，input框长短
             dispatch(actionCreators.searchFocus());
         },
