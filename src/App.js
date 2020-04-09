@@ -12,15 +12,13 @@ class App extends Component{
       // Provider里面所有的组件都有能力去使用store里的数据
       // Provider把store里的数据都提供给了它内部的Header组件
       <Provider store={store}>
-        <div>
-          <Header />
-          <BrowserRouter>
-            <div>
-              <Route path='/' exact component={Home}></Route>
-              <Route path='/detail' exact component={Detail}></Route>
-            </div>
-          </BrowserRouter>
-        </div>
+        <BrowserRouter>
+          <div>
+            <Header />
+            <Route path='/' exact component={Home}></Route>
+            <Route path='/detail' exact component={Detail}></Route>
+          </div>
+        </BrowserRouter>
       </Provider>
     );
   }
