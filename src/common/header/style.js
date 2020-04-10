@@ -5,6 +5,7 @@ import logoPic from '../../statics/logo.png';
 // 样式放到独立的组件中，样式不会影响其他的组件
 // 解决潜在样式冲突问题
 export const HeaderWrapper = styled.div`
+    z-index:1;
     position:relative;
     height:56px;
     border-bottom:1px solid #f0f0f0;
