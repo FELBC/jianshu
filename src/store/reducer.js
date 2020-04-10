@@ -5,12 +5,14 @@
 // 然后通过combineReducers再做整合
 import { combineReducers } from 'redux-immutable';
 import { reducer as headerReducer } from '../common/header/store';
-import { reducer as homeReducer} from '../pages/home/store';
+import { reducer as homeReducer } from '../pages/home/store';
+import { reducer as detailReducer } from '../pages/detail/store';
 
 //整合各模块对应reducer，组合成大的reducer
 const reducer = combineReducers({
     header: headerReducer,
-    home:homeReducer
+    home:homeReducer,
+    detail:detailReducer
 })
 
 export default reducer;
